@@ -1,3 +1,8 @@
 ---
 - name: Restart logentries
   service: name={{ logentries_service }} state=restarted sleep=5
+  when: not (ansible_distribution == "Ubuntu" and ansible_distribution_release == "xenial")
+ 
+- name: Restart logentries
+  systemd: name={{ logentries_service }} daemon_reload=yes
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_release == "xenial"
