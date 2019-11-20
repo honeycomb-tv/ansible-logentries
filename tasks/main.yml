@@ -60,7 +60,7 @@
 
 - name: Register host
   shell: "le register --force --name={{ logentries_hostname | default(ansible_fqdn) }} --hostname={{ logentries_hostname | default(ansible_fqdn) }} --yes --account-key={{ logentries_account_key }}"
-  when: result|failed and logentries_set_key is not defined
+  when: result is failed and logentries_set_key is not defined
 
 - name: Install logentries daemon APT
   apt: name={{ logentries_daemon_package }} state=present
