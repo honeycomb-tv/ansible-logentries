@@ -30,13 +30,15 @@
   when: ansible_os_family == "RedHat"
 
 - name: Install packages YUM
-  yum: name={{ item }} state=present
-  with_items: '{{ logentries_packages }}'
+  yum:
+    name: '{{ logentries_packages }}'
+    state: present
   when: ansible_os_family == "RedHat"
 
 - name: Install packages APT
-  apt: name={{ item }} state=present
-  with_items: '{{ logentries_packages }}'
+  apt:
+    name: '{{ logentries_packages }}'
+    state: present
   when: ansible_os_family == "Debian"
 
 - name: Ensure logentries config directory exists
